@@ -1,0 +1,36 @@
+// Bug Fix Example: Off-by-One Error in Loop
+
+// BEFORE (Buggy Code):
+// This code attempts to sum array elements but has an off-by-one error
+function sumArrayBuggy(arr) {
+    let sum = 0;
+    for (let i = 0; i <= arr.length; i++) {  // BUG: Uses <= instead of <
+        sum += arr[i];  // This causes undefined to be added on last iteration
+    }
+    return sum;
+}
+
+// Test case:
+// const numbers = [1, 2, 3, 4, 5];
+// sumArrayBuggy(numbers);  // Returns NaN due to undefined + number
+
+
+// AFTER (Fixed Code):
+// Corrected version with proper array bounds
+function sumArrayFixed(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {  // FIX: Uses < instead of <=
+        sum += arr[i];  // Now iterates only through valid indices
+    }
+    return sum;
+}
+
+// Test case:
+// const numbers = [1, 2, 3, 4, 5];
+// sumArrayFixed(numbers);  // Returns 15 (correct!)
+
+
+// Alternative Fix using modern JavaScript:
+function sumArrayModern(arr) {
+    return arr.reduce((sum, num) => sum + num, 0);
+}
